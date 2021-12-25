@@ -11,11 +11,10 @@ pub fn build(b: *Builder) void {
     // TODO: Make it configurable instead, so that it will be possible to compile on other platfoms.
     exe.linkSystemLibrary("sdl2");
     exe.linkLibC();
+    exe.install();
 
     const run_cmd = exe.run();
     const run_step = b.step("run", "snek");
     run_step.dependOn(&run_cmd.step);
-
-    exe.install();
 }
 

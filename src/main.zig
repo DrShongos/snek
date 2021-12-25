@@ -76,14 +76,6 @@ pub fn main() anyerror!void {
             }
         }
 
-        _ = SDL.c.SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
-        _ = SDL.c.SDL_RenderClear(renderer);
-
-        player.draw(renderer);
-        fruit_instance.draw(renderer);
-
-        SDL.c.SDL_RenderPresent(renderer);
-
         if (frame_count >= TICK_SPEED) {
             try player.update(x_velocity, y_velocity, WINDOW_SIZE);
             
@@ -95,6 +87,14 @@ pub fn main() anyerror!void {
 
             frame_count = 0;
         }
+
+        _ = SDL.c.SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
+        _ = SDL.c.SDL_RenderClear(renderer);
+
+        player.draw(renderer);
+        fruit_instance.draw(renderer);
+
+        SDL.c.SDL_RenderPresent(renderer);
 
         frame_count += 1;
     }

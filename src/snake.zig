@@ -65,7 +65,7 @@ pub const SnakeHead = struct {
     pub fn append_new_body(self: *SnakeHead) anyerror!void {
         // Because of the fact that variable memory is dropped when a function's block exits, the memory of the snake's segment is allocated on the heap
         // TODO: Consider cleaning this up.
-        const allocator = &gpa.allocator;
+        const allocator = gpa.allocator();
         var child = try allocator.create(Body);
 
         child.rect.x = self.last.prev_position.x;
@@ -108,7 +108,7 @@ pub const Body = struct {
 
     fn create_first(x: i32, y: i32, size: u8) anyerror!*Body {
         // Same thing as in `SnakeHead.append_new_child()`
-        const allocator = &gpa.allocator;
+        const allocator = gpa.allocator();
         var child = try allocator.create(Body);
 
         child.rect.x = x;
