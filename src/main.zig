@@ -76,9 +76,9 @@ pub fn main() anyerror!void {
             }
         }
 
-        if (frame_count >= TICK_SPEED) {
+        if (frame_count % TICK_SPEED == 0) {
             try player.update(x_velocity, y_velocity, WINDOW_SIZE);
-            
+
             if (player.touching_body() == true) break :mainloop;
             if (player.touching_fruit(&fruit_instance) == true) {
                 fruit_instance.pick_position(WINDOW_SIZE, TILE_SIZE);
